@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery实现vuejs的ajax</title>
+</head>
+<body>
+<!--      任务10      -->
+<div id="app">
+    <tasker>
+
+    </tasker>
+</div>
+<template id="task-temp">
+    当前状态：
+    <span>{{list.status.message}}</span><br>
+   welcome to {{list.data.name}}
+</template>
+<script src="http://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/vue/1.0.14/vue.js"></script>
+<script>
+    Vue.component('tasker',{
+        template:'#task-temp',
+        data:function () {
+            return {list:''}
+        },
+        created:function () {
+            var that=this;
+            $.post('http://localhost/api/v1/admin/login',{username : 'jmxt@jsfund.cn', password: '123456'},function(result){
+                that.list=result;
+            });
+        }
+    })
+    new Vue({
+        el:'#app',
+
+    })
+</script>
+</body>
+</html>
