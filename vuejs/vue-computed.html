@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>逻辑较为复杂的数据展示(处理代码逻辑的输出)</title>
+    <style type="text/css">
+        div{
+            margin:200px 0 0 500px;
+        }
+    </style>
+</head>
+<body>
+<!--      任务6      -->
+<div id="test">
+    Level {{level}}
+    <input type="text" v-model="first">
+    <input type="text" v-model="last">
+   <button>{{last+' '+first}}</button>
+    <button>{{username}}</button>
+</div>
+<!--不使用本地文件，用cdn服务代替-->
+<script src="http://cdn.bootcss.com/vue/1.0.14/vue.js"></script>
+<script>
+    new Vue({
+        el:'#test',
+        data:{
+            first:'Zhou',
+            last:'Sedefen',
+            points:200,
+        },
+        computed:{
+            level:function () {
+                if(this.points<100){
+                    return '普通会员'
+                }else{
+                    return 'vip会员'
+                }
+            },
+            username:function () {
+                return this.first+','+this.last;
+            }
+        }
+    })
+</script>
+</body>
+</html>

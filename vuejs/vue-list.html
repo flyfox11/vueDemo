@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <style type="text/css">
+        div{
+            margin:200px 0 0 500px;
+        }
+        .complete{
+            font-size: 25px;
+            color:green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!--      任务7      -->
+<div id="app">
+    <ul>
+        <!--    :class相当于v-class -->
+        <li  @click='toggleTask(task)' v-for="task in tasks" :class="task.completed? 'complete':''">{{task.body}}</li>
+        <!-- 以下是数组样式数组的形式  注意直接写complete(由于在data中没有这个变量，所以值为null,渲染的时候，就没有class)和'complete'的区别-->
+        <li  :class="['complete','com2','com3']">{{task.body}}</li>
+        <!--另一种比较高级的写法-->
+        <li  v-for="task in tasks" :class="{'complete':task.completed}">{{task.body}}</li>
+    </ul>
+</div>
+<script src="http://cdn.bootcss.com/vue/1.0.14/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            tasks:[
+                {body:'go to the movie',completed:true},
+                {body:'go to the shop',completed:false},
+                {body:'go to the player',completed:true}
+            ]
+        },
+        methods:{
+            toggleTask:function (task) {
+                task.completed=!task.completed;
+            }
+        }
+    })
+</script>
+</body>
+</html>

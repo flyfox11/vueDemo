@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开发todo应用</title>
+    <style type="text/css">
+        div{
+            margin:200px 0 0 500px;
+        }
+        .complete{
+            font-size: 25px;
+            color:green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!--      任务8      -->
+<div id="app">
+
+    <tasker :list="tasks">
+
+    </tasker>
+    <!--实现代码重用就可以实现了，在其他地方如下写-->
+    <tasker :list="[{body:'hah',completed:false}]"></tasker>
+</div>
+<template id="task-temp">
+    <ul>
+        <!--关键的一步，list替换tasks,list前面要加：不然就无法绑定list到view当中
+        此时又有click事件无效，可以将data中toggleTask函数放组件中，或者直接在@click中写
+        -->
+        <li  @click='task.completed=!task.completed' v-for="task in list" :class="task.completed? 'complete':''">{{task.body}}</li>
+    </ul>
+</template>
+<script src="http://cdn.bootcss.com/vue/1.0.14/vue.js"></script>
+<script>
+    Vue.component('tasker',{
+        template:'#task-temp',
+        props:['list'],
+        data:function () {
+
+        }
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            tasks:[
+                {body:'go to the movie',completed:true},
+                {body:'go to the shop',completed:false},
+                {body:'go to the player',completed:true}
+            ]
+        },
+        methods:{
+            toggleTask:function (task) {
+                task.completed=!task.completed;
+            }
+        }
+    })
+</script>
+</body>
+</html>

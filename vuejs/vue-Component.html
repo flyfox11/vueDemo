@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <style type="text/css">
+        div{
+            margin:200px 0 0 500px;
+        }
+    </style>
+</head>
+<body>
+<!--      任务4      -->
+<!--所谓组件化，就是指的是自定义的标签-->
+<div id="app">
+    <counter heading="likes" yanse="green"></counter>
+    <counter heading="dislikes" yanse="red"></counter>
+    <template id="counter-template">
+        <!--属性-->
+        <h1>{{heading}}</h1>
+        <button @click="count++" style="background: {{yanse}}">Submit{{count}}</button>
+    </template>
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+    //定义组件
+    Vue.component('counter',{
+        /*使用template标签的选择器，替代具体的一堆标签，template标签默认是在h5中不显示的*/
+        template:'#counter-template',
+        /*属性定义*/
+        props:['heading','yanse'],
+        /*注意：组件中的data和全局data的区别*/
+        data:function () {
+            return{count:0}
+        }
+    });
+    //初始化vue
+    new Vue({
+        el:'#app',
+        data:{
+            count:0
+        },
+        methods:{
+
+        }
+    })
+</script>
+</html>

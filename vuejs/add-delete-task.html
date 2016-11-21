@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加和删除任务</title>
+    <style type="text/css">
+        div{
+            margin:200px 0 0 500px;
+        }
+        .complete{
+            font-size: 25px;
+            color:green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!--      任务9      -->
+<div id="app">
+
+    <tasker :list="tasks">
+
+    </tasker>
+
+</div>
+<template id="task-temp">
+    <!--计算剩余未完成的任务-->
+    <h1 v-show="remaining">我的任务:{{remaining}}</h1>
+    <ul>
+        <!--关键的一步，list替换tasks,list前面要加：不然就无法绑定list到view当中
+        此时又有click事件无效，可以将data中toggleTask函数放组件中，或者直接在@click中写
+        -->
+        <li  @click='task.completed=!task.completed' v-for="task in list" :class="task.completed? 'complete':''">
+            {{task.body}}
+            <strong @click="deleteTask(task)">X</strong>
+        </li>
+    </ul>
+</template>
+<script src="http://cdn.bootcss.com/vue/1.0.14/vue.js"></script>
+<script>
+    Vue.component('tasker',{
+        template:'#task-temp',
+        props:['list'],
+        computed:{
+            remaining:function () {
+                return this.list.filter(function (task) {
+                    return !task.completed
+                }).length;
+            }
+        } ,
+        methods:{
+            deleteTask:function (task) {
+                //vue提供的删除数组中的元素方法  $remove
+                this.list.$remove(task);
+            }
+        }
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            tasks:[
+                {body:'go to the movie',completed:true},
+                {body:'go to the shop',completed:false},
+                {body:'go to the player',completed:true}
+            ]
+        },
+        methods:{
+            toggleTask:function (task) {
+                task.completed=!task.completed;
+            }
+        }
+    })
+</script>
+</body>
+</html>
