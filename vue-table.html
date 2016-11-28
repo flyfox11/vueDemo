@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="checkbox" id="che" v-model="chedata">
+    <label for="che">{{result}}</label>
+</div>
+<div id="app1">
+    <input type="checkbox" id="z" value="zhang" v-model="names">
+    <label for="z">zhang</label>
+    <input type="checkbox" id="w" value="wang" v-model="names">
+    <label for="w">wang</label>
+    <input type="checkbox" id="l" value="li" v-model="names">
+    <label for="l">li</label>
+    <span>选中的是{{names}}</span>
+</div>
+<div id="app2">
+    <input type="radio" id="man" value="male" v-model="sex">
+    <label for="man">男</label>
+    <input type="radio" id="woman" value="female" v-model="sex">
+    <label for="woman">女</label>
+    <span>选中的性别是：{{sexResult}}</span>
+</div>
+<div id="app3">
+    <!--<select name="" id="" v-model="selected">
+        <option >A</option>
+        <option >B</option>
+        <option >C</option>
+    </select>-->
+    <select v-model="selected">
+        <option v-for="option in options" :value="option.value">{{option.text}}</option>
+    </select>
+    <span>您选中的是{{selected}}</span>
+    <input type="text" v-model.trim="msg">
+</div>
+
+<script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
+<script>
+    vm=new Vue({
+        el:'#app',
+        data:{
+            chedata:''
+        },
+        computed:{
+            result:function () {
+                return this.chedata? '选中':'未选';
+            }
+        }
+    });
+    vm1=new Vue({
+        el:"#app1",
+        data:{
+            names:[]
+        }
+    });
+    new Vue({
+        el:'#app2',
+        data:{
+            sex:''
+        },
+        computed:{
+            sexResult:function () {
+                return this.sex==='male'?'男':'女';
+            }
+        }
+    });
+    vm2=new Vue({
+        el:'#app3',
+        /*data:{
+            selected:''
+        }*/
+        data:{
+            msg:'更新中...',
+            selected:'',
+            options:[
+                {text:'A',value:'你好'},
+                {text:'B',value:'我好'},
+                {text:'C',value:'大家好'}
+            ]
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的指令</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="name">
+    <input type="text" v-model="url">
+    <span v-bind:title="message">
+    Hover your mouse over me for a few seconds to see my dynamically bound title!
+    </span>
+    <spaner yanse="red"></spaner>
+
+</div>
+<template id="tem">
+    <h1 style="background: {{yanse}}">{{content}}</h1>
+</template>
+
+
+
+<div id="app-test">
+    <!--到这一刻为止，才是v-bind的妙用-->
+    <haha  v-bind:es="msg">
+
+    </haha>
+    <span v-once>{{x}}</span>
+    <span v-html="ht"></span>
+    <span :class="{active:isActive}">好不好</span>
+</div>
+<template id="tem-test">
+    <ol>
+        <li v-for="t in es">{{t.todo}}</li>
+    </ol>
+</template>
+<script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
+<script>
+    Vue.component('spaner',{
+        template:'#tem',
+        props:['yanse'],
+        data:function () {
+            return {content:'正在学习'};
+        }
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            name:'fis3',
+            url:'http://fis.baidu.com/fis3/docs/beginning/install.html',
+            message: 'You loaded this page on ' + new Date()
+        }
+    });
+    Vue.component('haha',{
+        template:'#tem-test',
+        props:['es'],
+        data:function () {
+            return {count:0}
+        }
+    });
+    var appTest=new Vue({
+        el:'#app-test',
+        data:{
+            msg:[
+                {todo:'吃饭'},
+                {todo:'睡觉'},
+                {todo:'工作'},
+            ],
+            x:'3',
+            ht:'<p>hahh</p>',
+            isActive:false
+
+        }
+    })
+    appTest.$watch('msg',function () {
+        alert('你动了msg的数据');
+    })
+</script>
+</body>
+</html>
