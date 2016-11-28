@@ -17,6 +17,8 @@ components:{
 HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）,
 否则就会出现无效的情况
 
+##界面抖动的问题
+由于{{data}}会出现抖动的情况，可以用v-text="data" 或v-html="data"解决
 
 ##安装步骤
 1.npm install -g vue-cli

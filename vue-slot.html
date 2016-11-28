@@ -19,8 +19,13 @@
 
 
 <div id="app2">
+
     <button  @click="change">切换</button>
     <keep-alive><component :is="view"></component></keep-alive>
+    <br>
+
+    <h1 v-html="test"></h1>
+    <h1>{{test}}</h1>
 </div>
 <script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
 <script>
@@ -37,7 +42,8 @@
     new Vue({
         el:'#app2',
         data:{
-            view:'h'
+            view:'h',
+            test:'test'
         },
         components:{
             h:{template:'<h1>第一</h1>'},
