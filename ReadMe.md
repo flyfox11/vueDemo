@@ -12,3 +12,7 @@ components:{
             'comp1':Child1,
             'cpp':cp
 }
+
+**特别注意**
+HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）,
+否则就会出现无效的情况
