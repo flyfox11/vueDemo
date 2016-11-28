@@ -11,11 +11,21 @@
 </div>
 <div id="app1">
     <btn btn-message="hha"></btn><btn></btn><btn></btn>
+    <input type="text" v-model="info">
+    <inp v-bind:information='info'></inp>
 </div>
+<div id="app2">
+    <bu @add="incre"></bu><bu @add="incre"></bu>结果为:{{d}}
+</div>
+<button id="hhh" value="do"></button>
 <script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
 <script>
     var Child1={
         template:'<h1>我是一级标题</h1>'
+    }
+    var Child2={
+        props:['information'],
+        template:'<span>{{information}}</span>'
     }
     var cp=Vue.component('comp',{
         template:'<div>哈哈1</div>'
@@ -39,8 +49,44 @@
         }
     })
     new Vue({
-        el:'#app1'
-    })
+        el:'#app1',
+        data:{
+            info:''
+        },
+        components:{
+            'inp':Child2
+        }
+    });
+
+    var Child3={
+        template:'<button @click="add">{{count}}</button>',
+        data:function () {
+            return {count:0}
+        },
+        methods:{
+            add:function () {
+                this.$emit('add');
+                this.count++;
+            }
+        }
+    }
+    new Vue({
+        el:'#app2',
+        components:{
+            'bu':Child3
+        },
+        data:{
+           d:0
+        },
+        methods:{
+            incre:function () {
+                return this.d++;
+            }
+        }
+    });
+    document.getElementById('hhh').onclick=function (e) {
+        alert(e.target.tagName);
+    }
 </script>
 </body>
 </html>

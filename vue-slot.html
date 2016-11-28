@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内容分发与keep-alive</title>
+</head>
+<body>
+<div id="app">
+    <h2>耳机标题</h2>
+    <cpp>
+        <h3>三级标题</h3>
+    </cpp>
+</div>
+<template id="temp">
+    <h1>一级标题</h1>
+
+    <slot></slot>
+</template>
+
+
+<div id="app2">
+    <button  @click="change">切换</button>
+    <keep-alive><component :is="view"></component></keep-alive>
+</div>
+<script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
+<script>
+    var cp=Vue.component('spanner',{
+        template:'#temp'
+    })
+    new Vue({
+        el:'#app',
+        components:{
+            'cpp':cp
+        }
+    });
+
+    new Vue({
+        el:'#app2',
+        data:{
+            view:'h'
+        },
+        components:{
+            h:{template:'<h1>第一</h1>'},
+            f:{template:'<a href="###">按钮</a>'},
+            d:{template:'<div>片段</div>'}
+        },
+        methods:{
+            change:function () {
+                if(this.view=='h'){
+                    this.view='f'
+                }else if(this.view=='f'){
+                    this.view='d'
+                }else if(this.view=='d'){
+                    this.view='h'
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
