@@ -16,3 +16,11 @@ components:{
 ##特别注意##
 HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）,
 否则就会出现无效的情况
+
+
+##安装步骤
+1.npm install -g vue-cli
+2.vue init webpack my-project
+3.cd my-project
+4.npm install
+5.vue run dev
