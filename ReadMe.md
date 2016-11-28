@@ -23,4 +23,4 @@ HTML 特性不区分大小写。当使用非字符串模版时，prop的名字�
 2.vue init webpack my-project
 3.cd my-project
 4.npm install
-5.vue run dev
+5.npm run dev
