@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的组件全解</title>
+</head>
+<body>
+<div id="app">
+        <cpp></cpp>
+    <comp></comp>
+</div>
+<div id="app1">
+    <btn btn-message="hha"></btn><btn></btn><btn></btn>
+</div>
+<script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
+<script>
+    var Child1={
+        template:'<h1>我是一级标题</h1>'
+    }
+    var cp=Vue.component('comp',{
+        template:'<div>哈哈1</div>'
+    })
+    new Vue({
+        el:'#app',
+        data:{
+
+        },
+        components:{
+            'comp1':Child1,
+            'cpp':cp  //此时相当于对组件进行了重命名，可以有效可用的
+        }
+    });
+    var dta={count:0};
+    Vue.component('btn',{
+        props:['btnMessage'],
+        template:'<button @click="count++">{{count}}+{{btnMessage}}</button>',
+        data:function () {
+            return dta;
+        }
+    })
+    new Vue({
+        el:'#app1'
+    })
+</script>
+</body>
+</html>
