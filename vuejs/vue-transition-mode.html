@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的过渡模式</title>
+    <style>
+        #app{
+            margin-left: 300px;
+        }
+        .slide-fade-enter-active ,.slide-fade-leave-active{
+            transition: all .3s ease;
+        }
+        .slide-fade-enter{
+            transform: translate(11px);
+
+            opacity: 0.3;
+        }
+        .slide-fade-leave-active{
+             transform: translate(-11px);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <transition mode="out-in" name="slide-fade">
+        <button v-if="isEditing" key="save" @click="change">
+            开
+        </button>
+        <button v-else key="edit" @click="change">
+            关
+        </button>
+    </transition>
+</div>
+<script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            isEditing:true
+        },
+        methods:{
+            change:function () {
+                this.isEditing=!this.isEditing;
+            }
+        }
+    })
+</script>
+</body>
+</html>
