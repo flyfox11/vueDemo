@@ -4,6 +4,15 @@
 性能上的不同，computed是基于缓存依赖，只有依赖关系发生变化才会去取值，消耗更少
 methods当重新渲染的时候，总会调用函数，相比而言更准确，但是消耗大
 
+##v-if与v-show的比较
+v-if切换消耗大，v-show初次加载消耗大
+如果不怎么切换的情况下，就用v-show
+如果初次加载避免消耗的话，就用v-if
+
+##v-html与v-text的比较
+v-text会把data中的变量值全部按照字符串显示出来，包括标签如&lt;h1&gt;a&lt;/h1&gt;
+v-html会将data中有标签的渲染成html，其他的字符串显示，上述标签就会是一级标题样式的a
+
 ##此时相当于对组件进行了重命名，可以有效可用的(comp和cpp都可用用)
 var cp=Vue.component('comp',{
         template:'&lt;div&gt;哈哈1&lt;/div&gt;'

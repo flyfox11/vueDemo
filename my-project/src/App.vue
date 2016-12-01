@@ -8,7 +8,7 @@
 <script>
 import Hello from './components/Hello'
 
-export default {
+export default {  //等同于 export出去了一个new Vue({...)
   name: 'app',
   components: {
     Hello

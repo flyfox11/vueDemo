@@ -21,9 +21,9 @@
 </template>
 
 <script>
-export default {
+export default { //等同于 export出去了一个new Vue({...)
   name: 'hello',
-  data () {
+  data () {  //es6语法，相当于data:function(){
     return {
       msg: 'Welcome to Your Vue.js App'
     }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 的过度效果</title>
+    <link href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <style type="text/css">
+        .fade-enter-active,.fade-leave-active{
+            transition: opacity 0.5s;
+        }
+        .fade-enter,.fade-leave-active{
+            opacity: 0;
+        }
+        /**/
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter, .slide-fade-leave-active {
+            padding-left: 10px;
+            opacity: 0;
+        }
+        /**/
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+        .bounce-leave-active {
+            animation: bounce-out .5s;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes bounce-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <button @click="isShow=!isShow">toggle</button>
+    <!--<transition name="slide-fade">
+        <h1 v-text="msg" v-show="isShow"></h1>
+    </transition>-->
+    <!--<transition name="bounce">
+        <h1 v-text="msg" v-show="isShow"></h1>
+    </transition>-->
+    <transition
+            name="custom-classes-transition"
+            enter-active-class="animated flipInX"
+            leave-active-class="animated hinge"
+    >
+        <h1 v-text="msg" v-show="isShow"></h1>
+    </transition>
+</div>
+<script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
+<script>
+    new Vue({
+        el:'#demo',
+        data:{
+            msg:'hello',
+            isShow:true
+        }
+    })
+</script>
+</body>
+</html>
