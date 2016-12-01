@@ -65,7 +65,7 @@
         },
         methods:{
             add:function () {
-                this.$emit('add');
+                this.$emit('add');//相当于在父组件上定义了一个类似click的事件，还可以在add后加，参数
                 this.count++;
             }
         }
