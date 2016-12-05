@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的过渡状态</title>
+</head>
+<body>
+<div id="test">
+    <input type="number" v-model.number="num" step="20">
+    <p v-text="numAnim"></p>
+</div>
+<script src="https://unpkg.com/tween.js@16.3.4"></script>
+<script src="http://cdn.bootcss.com/vue/2.1.0/vue.min.js"></script>
+<script>
+    new Vue({
+        el:'#test',
+        data:{
+            num:0,
+            numAnim:0
+        },
+        watch:{
+            num:function (newValue,oldValue) {
+                var vm=this;
+                function animate (time) {
+                    requestAnimationFrame(animate)
+                    TWEEN.update(time)
+                }
+                new TWEEN.Tween({ tweeningNumber: oldValue })
+                        .easing(TWEEN.Easing.Quadratic.Out)
+                        .to({tweeningNumber: newValue }, 500)
+                        .onUpdate(function () {
+                            vm.numAnim=this.tweeningNumber.toFixed(0)
+                        })
+                        .start();
+                animate();
+            }
+        }
+    })
+</script>
+</body>
+</html>
