@@ -32,6 +32,10 @@ HTML 特性不区分大小写。当使用非字符串模版时，prop的名字�
 ###this.$emit('add');
 相当于在父组件上定义了一个类似click的事件，还可以在add后加，参数。用于子组件向父组件传递数据
 
+###注意：
+new Vue({...})必须放在Vue.component('XXX', {...})之后，否则组件中的各种设置无效
+
+
 ##安装步骤
 1.npm install -g vue-cli
 2.vue init webpack my-project
